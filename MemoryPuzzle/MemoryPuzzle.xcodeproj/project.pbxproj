@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -28,6 +28,7 @@
 		F44CE23E24619EA200EB3C2B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F44CE24124619EA200EB3C2B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F44CE24324619EA200EB3C2B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F44CE2492461AA0700EB3C2B /* diablo.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = diablo.ttf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +79,7 @@
 				F44CE23E24619EA200EB3C2B /* Assets.xcassets */,
 				F44CE24024619EA200EB3C2B /* LaunchScreen.storyboard */,
 				F44CE24324619EA200EB3C2B /* Info.plist */,
+				F44CE2492461AA0700EB3C2B /* diablo.ttf */,
 			);
 			path = MemoryPuzzle;
 			sourceTree = "<group>";
@@ -88,7 +90,6 @@
 				18EE24C1D3104FE4956CD620 /* Pods-MemoryPuzzle.debug.xcconfig */,
 				62F2E8570E5D1F6A4A16C6A5 /* Pods-MemoryPuzzle.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
