@@ -9,11 +9,15 @@
 /* Begin PBXBuildFile section */
 		993D5D3C0F89E19DAC04930D /* Pods_MemoryPuzzle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E5B65E90897930E6722CABF /* Pods_MemoryPuzzle.framework */; };
 		F44CE23624619EA000EB3C2B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44CE23524619EA000EB3C2B /* AppDelegate.swift */; };
-		F44CE23824619EA000EB3C2B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44CE23724619EA000EB3C2B /* SceneDelegate.swift */; };
-		F44CE23A24619EA000EB3C2B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44CE23924619EA000EB3C2B /* ViewController.swift */; };
-		F44CE23D24619EA000EB3C2B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F44CE23B24619EA000EB3C2B /* Main.storyboard */; };
 		F44CE23F24619EA200EB3C2B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F44CE23E24619EA200EB3C2B /* Assets.xcassets */; };
 		F44CE24224619EA200EB3C2B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F44CE24024619EA200EB3C2B /* LaunchScreen.storyboard */; };
+		F45AF37224629851009DC5D3 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45AF37124629851009DC5D3 /* MainViewController.swift */; };
+		F45AF3782462AC76009DC5D3 /* LogoAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45AF3772462AC76009DC5D3 /* LogoAnimationView.swift */; };
+		F45AF37A2462B170009DC5D3 /* logo.gif in Resources */ = {isa = PBXBuildFile; fileRef = F45AF3792462B170009DC5D3 /* logo.gif */; };
+		F45AF37C2462B391009DC5D3 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45AF37B2462B391009DC5D3 /* MainView.swift */; };
+		F45AF37D2462BCF1009DC5D3 /* diablo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F44CE2492461AA0700EB3C2B /* diablo.ttf */; };
+		F45AF37F2462CB41009DC5D3 /* TimeLaps.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45AF37E2462CB41009DC5D3 /* TimeLaps.swift */; };
+		F45AF3842462CDE4009DC5D3 /* GameManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45AF3832462CDE4009DC5D3 /* GameManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,13 +26,16 @@
 		62F2E8570E5D1F6A4A16C6A5 /* Pods-MemoryPuzzle.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MemoryPuzzle.release.xcconfig"; path = "Target Support Files/Pods-MemoryPuzzle/Pods-MemoryPuzzle.release.xcconfig"; sourceTree = "<group>"; };
 		F44CE23224619EA000EB3C2B /* MemoryPuzzle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MemoryPuzzle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F44CE23524619EA000EB3C2B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		F44CE23724619EA000EB3C2B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		F44CE23924619EA000EB3C2B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		F44CE23C24619EA000EB3C2B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F44CE23E24619EA200EB3C2B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F44CE24124619EA200EB3C2B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F44CE24324619EA200EB3C2B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F44CE2492461AA0700EB3C2B /* diablo.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = diablo.ttf; sourceTree = "<group>"; };
+		F45AF37124629851009DC5D3 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		F45AF3772462AC76009DC5D3 /* LogoAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoAnimationView.swift; sourceTree = "<group>"; };
+		F45AF3792462B170009DC5D3 /* logo.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = logo.gif; path = ../../../../../../Downloads/logo.gif; sourceTree = "<group>"; };
+		F45AF37B2462B391009DC5D3 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		F45AF37E2462CB41009DC5D3 /* TimeLaps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeLaps.swift; sourceTree = "<group>"; };
+		F45AF3832462CDE4009DC5D3 /* GameManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,16 +79,51 @@
 		F44CE23424619EA000EB3C2B /* MemoryPuzzle */ = {
 			isa = PBXGroup;
 			children = (
+				F45AF37624629891009DC5D3 /* Models */,
+				F45AF3752462988C009DC5D3 /* Cells */,
+				F45AF37424629887009DC5D3 /* Views */,
+				F45AF37324629882009DC5D3 /* Controllers */,
 				F44CE23524619EA000EB3C2B /* AppDelegate.swift */,
-				F44CE23724619EA000EB3C2B /* SceneDelegate.swift */,
-				F44CE23924619EA000EB3C2B /* ViewController.swift */,
-				F44CE23B24619EA000EB3C2B /* Main.storyboard */,
 				F44CE23E24619EA200EB3C2B /* Assets.xcassets */,
 				F44CE24024619EA200EB3C2B /* LaunchScreen.storyboard */,
 				F44CE24324619EA200EB3C2B /* Info.plist */,
 				F44CE2492461AA0700EB3C2B /* diablo.ttf */,
 			);
 			path = MemoryPuzzle;
+			sourceTree = "<group>";
+		};
+		F45AF37324629882009DC5D3 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				F45AF37124629851009DC5D3 /* MainViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		F45AF37424629887009DC5D3 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				F45AF3792462B170009DC5D3 /* logo.gif */,
+				F45AF3772462AC76009DC5D3 /* LogoAnimationView.swift */,
+				F45AF37B2462B391009DC5D3 /* MainView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		F45AF3752462988C009DC5D3 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		F45AF37624629891009DC5D3 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				F45AF37E2462CB41009DC5D3 /* TimeLaps.swift */,
+				F45AF3832462CDE4009DC5D3 /* GameManager.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		F8ED1D3761E1BA830584F89D /* Pods */ = {
@@ -154,8 +196,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				F44CE24224619EA200EB3C2B /* LaunchScreen.storyboard in Resources */,
+				F45AF37D2462BCF1009DC5D3 /* diablo.ttf in Resources */,
+				F45AF37A2462B170009DC5D3 /* logo.gif in Resources */,
 				F44CE23F24619EA200EB3C2B /* Assets.xcassets in Resources */,
-				F44CE23D24619EA000EB3C2B /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -208,23 +251,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F44CE23A24619EA000EB3C2B /* ViewController.swift in Sources */,
+				F45AF37F2462CB41009DC5D3 /* TimeLaps.swift in Sources */,
+				F45AF3842462CDE4009DC5D3 /* GameManager.swift in Sources */,
 				F44CE23624619EA000EB3C2B /* AppDelegate.swift in Sources */,
-				F44CE23824619EA000EB3C2B /* SceneDelegate.swift in Sources */,
+				F45AF37C2462B391009DC5D3 /* MainView.swift in Sources */,
+				F45AF37224629851009DC5D3 /* MainViewController.swift in Sources */,
+				F45AF3782462AC76009DC5D3 /* LogoAnimationView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		F44CE23B24619EA000EB3C2B /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				F44CE23C24619EA000EB3C2B /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		F44CE24024619EA200EB3C2B /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

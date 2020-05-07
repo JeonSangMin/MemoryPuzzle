@@ -7,5 +7,6 @@ target 'MemoryPuzzle' do
 
   # Pods for MemoryPuzzle
   pod 'SnapKit'
+  pod 'SwiftyGif'
 
 end
