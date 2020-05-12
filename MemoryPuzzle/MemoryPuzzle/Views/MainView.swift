@@ -4,7 +4,10 @@
 //
 //  Created by MyMac on 2020/05/06.
 //  Copyright © 2020 sandMan. All rights reserved.
-//
+
+protocol ButtonIsClicked: class {
+    func pushViewController(cards: [Card], itemsInline: CGFloat, linesOnScreen: CGFloat, ingameViewImageName: String)
+}
 
 import UIKit
 
@@ -16,6 +19,7 @@ class MainView: UIView {
     private let hellButton = UIButton()
     private let recordButton = UIButton()
 
+    weak var delegate: ButtonIsClicked?
     
     override init(frame: CGRect) {
         super.init(frame: .zero)
@@ -55,12 +59,8 @@ class MainView: UIView {
             $0.layer.shadowOffset = CGSize.zero
             $0.layer.shadowRadius = 8
             $0.layer.masksToBounds = false
-            
-            $0.snp.makeConstraints {
-                $0.centerX.equalTo(self.snp.centerX)
-                $0.width.equalTo(self).multipliedBy(0.7)
-                $0.height.equalTo(40)
-            }
+                        
+            $0.addTarget(self, action: #selector(touchUpButton(_:)), for: .touchUpInside)
         }
         normalButton.setTitle("Normal", for: .normal)
         nightMareButton.setTitle("NightMare", for: .normal)
@@ -74,7 +74,7 @@ class MainView: UIView {
                 $0.top.equalTo(top).offset(35)
                 $0.centerX.equalTo(self.snp.centerX)
                 $0.width.equalToSuperview().multipliedBy(0.7)
-                $0.height.equalTo(70)
+                $0.height.equalTo(40)
             }
         }
         
@@ -88,7 +88,25 @@ class MainView: UIView {
         mainTitle.snp.makeConstraints {
             $0.center.equalTo(self.snp.center)
         }
-        
-        
+    }
+    
+    @objc private func touchUpButton(_ sender: UIButton) {
+        switch sender.titleLabel?.text {
+        case "Normal":
+            let cards = (normalCards + normalCards).shuffled()
+            delegate?.pushViewController(cards: cards, itemsInline: 4, linesOnScreen: 5, ingameViewImageName: "Normal")
+        case "NightMare":
+            let cards = (nightMareCards + nightMareCards).shuffled()
+            delegate?.pushViewController(cards: cards, itemsInline: 5, linesOnScreen: 8, ingameViewImageName: "NightMare")
+        case "Hell":
+            let cards = (hellCards + hellCards).shuffled()
+            delegate?.pushViewController(cards: cards, itemsInline: 6, linesOnScreen: 10, ingameViewImageName: "Hell")
+        case "Records":
+            print("기록버튼 클릭")
+        default:
+            break
+        }
     }
 }
+
+
