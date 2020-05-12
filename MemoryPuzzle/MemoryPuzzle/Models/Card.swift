@@ -10,25 +10,48 @@ import Foundation
 
 struct Card {
     let name: String
-
 }
 
 var card: [String] = {
     var arr = [String]()
-    (0...40).forEach {
+    (1...40).forEach {
         arr.append("item\($0)")
     }
     return arr
 }()
 
-var normalCards: [Card] = Array(1...10).map { _ in
-    Card(name: card.randomElement()!)
-}
+var normalCards: [Card] = {
+    let allCards = card
+    let pick10Cards = allCards[randomPick: 10].map {
+        Card(name: $0)
+    }
+    return pick10Cards
+}()
 
-var nightMareCards: [Card] = Array(1...20).map { _ in
-    Card(name: card.randomElement()!)
-}
+var nightMareCards: [Card] = {
+    let allCards = card
+    let pick20Cards = allCards[randomPick: 20].map {
+        Card(name: $0)
+    }
+    return pick20Cards
+}()
 
-var hellCards: [Card] = Array(1...30).map { _ in
-    Card(name: card.randomElement()!)
+var hellCards: [Card] = {
+    let allCards = card
+    let pick30Cards = allCards[randomPick: 30].map {
+        Card(name: $0)
+    }
+    return pick30Cards
+}()
+
+
+extension Array {
+    /// Picks `n` random elements (partial Fisher-Yates shuffle approach)
+    subscript (randomPick n: Int) -> [Element] {
+        var copy = self
+        for i in stride(from: count - 1, to: count - n - 1, by: -1) {
+            copy.swapAt(i, Int(arc4random_uniform(UInt32(i + 1))))
+        }
+        return Array(copy.suffix(n))
+    }
 }
