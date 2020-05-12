@@ -16,16 +16,27 @@ final class GameManager {
     private var isPause = false
     private var time: Double = 0
     
-    // 문열리기
-    fileprivate func openTheGate(leftDoor: UIImageView, rightDoor: UIImageView) {
+    // 카드 터치 감지
+    func getTouchedCard(cell: PuzzleCell) {
+        if cell.isSelected {
+            cell.flipToFront()
+        } else {
+            cell.flipToBack()
+        }
+    }
+    
+    
+    
+    // 문 닫히기
+    fileprivate func closeTheGate(leftDoor: UIImageView, rightDoor: UIImageView) {
+        leftDoor.isHidden = false
+        rightDoor.isHidden = false
         UIView.animate(withDuration: 1, animations: {
-            leftDoor.transform = CGAffineTransform(translationX: -(UIScreen.main.bounds.width / 2), y: 0)
-            rightDoor.transform = CGAffineTransform(translationX: UIScreen.main.bounds.width / 2, y: 0)
-            leftDoor.isHidden = true
-            rightDoor.isHidden = true
+            leftDoor.transform = CGAffineTransform(translationX: UIScreen.main.bounds.width / 2, y: 0)
+            rightDoor.transform = CGAffineTransform(translationX: -(UIScreen.main.bounds.width / 2), y: 0)
         })
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
-            
+            self.closeTheGateAudio()
         }
     }
     
