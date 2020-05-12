@@ -10,7 +10,15 @@ import UIKit
 
 class PuzzleCell: UICollectionViewCell {
     static let identifier = "PuzzleCell"
-    private var isTouched: Bool = false
+    var isTouched: Bool = false {
+        didSet {
+            if isTouched {
+                UIView.transition(with: self, duration: 0.3, options: .transitionFlipFromLeft, animations: nil, completion: nil)
+            } else {
+                UIView.transition(with: self, duration: 0.3, options: .transitionFlipFromRight, animations: nil, completion: nil)
+            }
+        }
+    }
     private let imageView = UIImageView()
     
     override init(frame: CGRect) {
@@ -35,6 +43,10 @@ class PuzzleCell: UICollectionViewCell {
         imageView.snp.makeConstraints {
             $0.top.leading.trailing.bottom.equalTo(self)
         }
-        imageView.image = UIImage(named: "back")
+        configure(named: "back")
+    }
+    
+    func configure(named imageName: String) {
+        imageView.image = UIImage(named: imageName)
     }
 }
