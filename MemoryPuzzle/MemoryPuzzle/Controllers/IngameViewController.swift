@@ -13,7 +13,8 @@ import UIKit
 class IngameViewController: UIViewController {
     private let ingameView = IngameView()
     private let ingameViewImageName: String
-    
+    private let leftDoor = UIImageView()
+    private let rightDoor = UIImageView()
     
     private lazy var collectionView = UICollectionView(frame: ingameView.frame, collectionViewLayout: layout)
     private let layout = UICollectionViewFlowLayout()
@@ -30,33 +31,7 @@ class IngameViewController: UIViewController {
         setNaviBar()
         setUI()
         setCollectionView()
-        collectionView.register(PuzzleCell.self, forCellWithReuseIdentifier: PuzzleCell.identifier)
-        collectionView.dataSource = self
-        collectionView.delegate = self
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        print(#function)
-        setFlowLayout()
-        ingameView.configure(background: ingameViewImageName)
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        collectionView.reloadData()
-    }
-    
-    override func viewSafeAreaInsetsDidChange() {
-        super.viewSafeAreaInsetsDidChange()
-        print(#function)
-        setFlowLayout()
-    }
-    
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-        print(#function)
-        setFlowLayout()
+        print(dataCards)
     }
     
     init(cards: [Card], itemsInline: CGFloat, linesOnScreen: CGFloat, ingameViewImageName: String) {
@@ -70,6 +45,28 @@ class IngameViewController: UIViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setFlowLayout()
+        ingameView.configure(background: ingameViewImageName)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        collectionView.reloadData()
+    }
+    
+    override func viewSafeAreaInsetsDidChange() {
+        super.viewSafeAreaInsetsDidChange()
+        setFlowLayout()
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        setFlowLayout()
+    }
+    
     
     private func setNaviBar() {
         self.navigationController?.isNavigationBarHidden = false
@@ -95,14 +92,45 @@ class IngameViewController: UIViewController {
             $0.top.equalTo(view.safeAreaLayoutGuide)
             $0.leading.trailing.bottom.equalToSuperview()
         }
+        
+        [leftDoor, rightDoor].forEach {
+            view.addSubview($0)
+            $0.isHidden = true
+            $0.snp.makeConstraints {
+                $0.width.equalToSuperview().multipliedBy(0.5)
+                $0.top.equalTo(view.safeAreaLayoutGuide)
+                $0.bottom.equalToSuperview()
+            }
+        }
+        
+        leftDoor.image = UIImage(named: "leftDoor")
+        rightDoor.image = UIImage(named: "rightDoor")
+        
+        leftDoor.snp.makeConstraints {
+            $0.trailing.equalTo(view.snp.leading)
+        }
+        rightDoor.snp.makeConstraints {
+            $0.leading.equalTo(view.snp.trailing)
+        }
+        
     }
     
     private func setCollectionView() {
         view.addSubview(collectionView)
+        
+        collectionView.register(PuzzleCell.self, forCellWithReuseIdentifier: PuzzleCell.identifier)
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        
+        collectionView.isMultipleTouchEnabled = true
+        collectionView.allowsSelection = true
+        collectionView.allowsMultipleSelection = true
+        
         collectionView.backgroundColor = .clear
         collectionView.snp.makeConstraints {
             $0.leading.trailing.top.bottom.equalTo(ingameView)
         }
+        
     }
     
     @objc private func pause(_ sender: UIBarButtonItem) {
@@ -112,6 +140,37 @@ class IngameViewController: UIViewController {
     
 }
 
+
+extension IngameViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+    
+    // MARK: DataSource
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        self.dataCards.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PuzzleCell.identifier, for: indexPath) as! PuzzleCell
+        return cell
+    }
+    
+    // MARK: Delegate
+    // 낙장불입!(다시 뒤집을 수 없음)
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let cell = collectionView.cellForItem(at: indexPath) as? PuzzleCell else { return }
+        cell.configure(named: dataCards[indexPath.item].name)
+        manager.getTouchedCard(cell: cell)
+        print(cell.isSelected)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        guard let cell = collectionView.cellForItem(at: indexPath) as? PuzzleCell else { return }
+        cell.configure(named: "back")
+        manager.getTouchedCard(cell: cell)
+        print(cell.isSelected)
+    }
+}
+
+// MARK: Set FlowLayout
 extension IngameViewController {
 
     func setFlowLayout(){
@@ -124,7 +183,7 @@ extension IngameViewController {
         let lineSpacing = 7 * (self.linesOnScreen - 1)
         
         let horizontalInset = edgeInsets.left + edgeInsets.right
-        let verticalInset = edgeInsets.top + edgeInsets.bottom //+ ingameView.safeAreaInsets.top + view.safeAreaInsets.bottom
+        let verticalInset = edgeInsets.top + edgeInsets.bottom
         
         let horizontalSpacing = itemSpacing + horizontalInset
         let verticalSpacing = lineSpacing + verticalInset
@@ -140,18 +199,3 @@ extension IngameViewController {
             height: height.rounded(.down) - 1)
     }
 }
-
-extension IngameViewController: UICollectionViewDataSource, UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        self.dataCards.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PuzzleCell.identifier, for: indexPath) as! PuzzleCell
-        return cell
-    }
-    
-    
-}
-
-
