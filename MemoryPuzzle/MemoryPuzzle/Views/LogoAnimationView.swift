@@ -13,7 +13,7 @@ import SwiftyGif
 class LogoAnimationView: UIView {
     
     let logoGifImageView: UIImageView = {
-        guard let gifImage = try? UIImage(gifName: "logo.gif") else {
+        guard let gifImage = try? UIImage(gifName: "launch.gif") else {
             return UIImageView()
         }
         return UIImageView(gifImage: gifImage, loopCount: 1)
@@ -41,10 +41,4 @@ class LogoAnimationView: UIView {
     }
 }
 
-extension UIView {
-    func pinEdgesToSuperView() {
-        self.snp.makeConstraints {
-            $0.top.bottom.leading.trailing.equalToSuperview()
-        }
-    }
-}
+
