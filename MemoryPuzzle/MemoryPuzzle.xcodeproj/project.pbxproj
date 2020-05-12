@@ -13,11 +13,16 @@
 		F44CE24224619EA200EB3C2B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F44CE24024619EA200EB3C2B /* LaunchScreen.storyboard */; };
 		F45AF37224629851009DC5D3 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45AF37124629851009DC5D3 /* MainViewController.swift */; };
 		F45AF3782462AC76009DC5D3 /* LogoAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45AF3772462AC76009DC5D3 /* LogoAnimationView.swift */; };
-		F45AF37A2462B170009DC5D3 /* logo.gif in Resources */ = {isa = PBXBuildFile; fileRef = F45AF3792462B170009DC5D3 /* logo.gif */; };
 		F45AF37C2462B391009DC5D3 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45AF37B2462B391009DC5D3 /* MainView.swift */; };
 		F45AF37D2462BCF1009DC5D3 /* diablo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F44CE2492461AA0700EB3C2B /* diablo.ttf */; };
 		F45AF37F2462CB41009DC5D3 /* TimeLaps.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45AF37E2462CB41009DC5D3 /* TimeLaps.swift */; };
 		F45AF3842462CDE4009DC5D3 /* GameManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45AF3832462CDE4009DC5D3 /* GameManager.swift */; };
+		F486253824654AAA00284547 /* IngameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F486253724654AAA00284547 /* IngameViewController.swift */; };
+		F486253A24654B0700284547 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = F486253924654B0700284547 /* Card.swift */; };
+		F486253C2465516E00284547 /* PuzzleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F486253B2465516E00284547 /* PuzzleCell.swift */; };
+		F486253E24655FDE00284547 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F486253D24655FDE00284547 /* Extensions.swift */; };
+		F48625402465603000284547 /* IngameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F486253F2465603000284547 /* IngameView.swift */; };
+		F486254724656B6200284547 /* launch.gif in Resources */ = {isa = PBXBuildFile; fileRef = F486254624656B6200284547 /* launch.gif */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,10 +37,15 @@
 		F44CE2492461AA0700EB3C2B /* diablo.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = diablo.ttf; sourceTree = "<group>"; };
 		F45AF37124629851009DC5D3 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		F45AF3772462AC76009DC5D3 /* LogoAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoAnimationView.swift; sourceTree = "<group>"; };
-		F45AF3792462B170009DC5D3 /* logo.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = logo.gif; path = ../../../../../../Downloads/logo.gif; sourceTree = "<group>"; };
 		F45AF37B2462B391009DC5D3 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		F45AF37E2462CB41009DC5D3 /* TimeLaps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeLaps.swift; sourceTree = "<group>"; };
 		F45AF3832462CDE4009DC5D3 /* GameManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameManager.swift; sourceTree = "<group>"; };
+		F486253724654AAA00284547 /* IngameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngameViewController.swift; sourceTree = "<group>"; };
+		F486253924654B0700284547 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
+		F486253B2465516E00284547 /* PuzzleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuzzleCell.swift; sourceTree = "<group>"; };
+		F486253D24655FDE00284547 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		F486253F2465603000284547 /* IngameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngameView.swift; sourceTree = "<group>"; };
+		F486254624656B6200284547 /* launch.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = launch.gif; path = ../../../../../../.Trash/launch.gif; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +89,7 @@
 		F44CE23424619EA000EB3C2B /* MemoryPuzzle */ = {
 			isa = PBXGroup;
 			children = (
+				F486254524656B5400284547 /* Assets */,
 				F45AF37624629891009DC5D3 /* Models */,
 				F45AF3752462988C009DC5D3 /* Cells */,
 				F45AF37424629887009DC5D3 /* Views */,
@@ -87,7 +98,6 @@
 				F44CE23E24619EA200EB3C2B /* Assets.xcassets */,
 				F44CE24024619EA200EB3C2B /* LaunchScreen.storyboard */,
 				F44CE24324619EA200EB3C2B /* Info.plist */,
-				F44CE2492461AA0700EB3C2B /* diablo.ttf */,
 			);
 			path = MemoryPuzzle;
 			sourceTree = "<group>";
@@ -96,6 +106,7 @@
 			isa = PBXGroup;
 			children = (
 				F45AF37124629851009DC5D3 /* MainViewController.swift */,
+				F486253724654AAA00284547 /* IngameViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -103,9 +114,9 @@
 		F45AF37424629887009DC5D3 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				F45AF3792462B170009DC5D3 /* logo.gif */,
 				F45AF3772462AC76009DC5D3 /* LogoAnimationView.swift */,
 				F45AF37B2462B391009DC5D3 /* MainView.swift */,
+				F486253F2465603000284547 /* IngameView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -113,6 +124,7 @@
 		F45AF3752462988C009DC5D3 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				F486253B2465516E00284547 /* PuzzleCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -122,8 +134,19 @@
 			children = (
 				F45AF37E2462CB41009DC5D3 /* TimeLaps.swift */,
 				F45AF3832462CDE4009DC5D3 /* GameManager.swift */,
+				F486253924654B0700284547 /* Card.swift */,
+				F486253D24655FDE00284547 /* Extensions.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		F486254524656B5400284547 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				F44CE2492461AA0700EB3C2B /* diablo.ttf */,
+				F486254624656B6200284547 /* launch.gif */,
+			);
+			path = Assets;
 			sourceTree = "<group>";
 		};
 		F8ED1D3761E1BA830584F89D /* Pods */ = {
@@ -196,8 +219,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				F44CE24224619EA200EB3C2B /* LaunchScreen.storyboard in Resources */,
+				F486254724656B6200284547 /* launch.gif in Resources */,
 				F45AF37D2462BCF1009DC5D3 /* diablo.ttf in Resources */,
-				F45AF37A2462B170009DC5D3 /* logo.gif in Resources */,
 				F44CE23F24619EA200EB3C2B /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -251,12 +274,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F48625402465603000284547 /* IngameView.swift in Sources */,
 				F45AF37F2462CB41009DC5D3 /* TimeLaps.swift in Sources */,
 				F45AF3842462CDE4009DC5D3 /* GameManager.swift in Sources */,
 				F44CE23624619EA000EB3C2B /* AppDelegate.swift in Sources */,
+				F486253C2465516E00284547 /* PuzzleCell.swift in Sources */,
 				F45AF37C2462B391009DC5D3 /* MainView.swift in Sources */,
+				F486253E24655FDE00284547 /* Extensions.swift in Sources */,
+				F486253824654AAA00284547 /* IngameViewController.swift in Sources */,
 				F45AF37224629851009DC5D3 /* MainViewController.swift in Sources */,
 				F45AF3782462AC76009DC5D3 /* LogoAnimationView.swift in Sources */,
+				F486253A24654B0700284547 /* Card.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -331,6 +359,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_PRECOMPILE_BRIDGING_HEADER = YES;
 			};
 			name = Debug;
 		};
@@ -384,6 +413,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_PRECOMPILE_BRIDGING_HEADER = YES;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
