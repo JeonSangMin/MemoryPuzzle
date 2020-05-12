@@ -14,9 +14,15 @@ class MainViewController: UIViewController {
     private let logoAnimationView = LogoAnimationView()
     private let mainView = MainView()
     
+    // 상태바 색상 설정
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        setNavigationBarTranstransparently()
+        mainView.isHidden = true
+        mainView.delegate = self
         view.addSubview(logoAnimationView)
         view.addSubview(mainView)
         logoAnimationView.pinEdgesToSuperView()
@@ -24,22 +30,23 @@ class MainViewController: UIViewController {
         logoAnimationView.logoGifImageView.delegate = self
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setNavigationBar()
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         logoAnimationView.logoGifImageView.startAnimatingGif()
-        mainView.isHidden = true
     }
     
-    // 네비게이션바 투명 설정
-    private func setNavigationBarTranstransparently() {
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
-        self.navigationController?.navigationBar.shadowImage = UIImage()
-        self.navigationController?.navigationBar.isTranslucent = true
-        self.navigationController?.view.backgroundColor = UIColor.clear
-    }
-
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
+    // 네비게이션바 설정
+    private func setNavigationBar() {
+        self.navigationController?.isNavigationBarHidden = true
+        let backButton = UIBarButtonItem(title: "Back", style: .plain, target: nil, action: nil)
+        backButton.setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "diablo", size: 20) as Any], for: .normal)
+        self.navigationItem.backBarButtonItem = backButton
+        self.navigationItem.backBarButtonItem?.tintColor = #colorLiteral(red: 0.4784313725, green: 0.02745098039, blue: 0.06274509804, alpha: 1)
     }
     
 }
@@ -51,10 +58,11 @@ extension MainViewController: SwiftyGifDelegate {
     }
 }
 
-// MARK: 네비게이션바 때문에 가려져서 preferredStatusBarStyle 안먹히기 때문에 사용
-extension UINavigationController {
-    open override var preferredStatusBarStyle: UIStatusBarStyle {
-        return topViewController?.preferredStatusBarStyle ?? .default
+
+extension MainViewController: ButtonIsClicked {
+    func pushViewController(cards: [Card], itemsInline: CGFloat, linesOnScreen: CGFloat, ingameViewImageName: String) {
+        let stageVC = IngameViewController(cards: cards, itemsInline: itemsInline, linesOnScreen: linesOnScreen, ingameViewImageName: ingameViewImageName)
+        self.navigationController?.pushViewController(stageVC, animated: true)
+        
     }
 }
-
