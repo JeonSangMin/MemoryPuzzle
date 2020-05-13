@@ -25,6 +25,10 @@ final class GameManager {
         }
     }
     
+    func gameSet(pauseButton: UIBarButtonItem, isEnabled: Bool, collectionView: UICollectionView, isUserInteractionEnabled: Bool) {
+        pauseButton.isEnabled = isEnabled
+        collectionView.isUserInteractionEnabled = isUserInteractionEnabled
+    }
     
     
     // 문 닫히기

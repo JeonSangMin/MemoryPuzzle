@@ -15,6 +15,7 @@ class IngameViewController: UIViewController {
     private let ingameViewImageName: String
     private let leftDoor = UIImageView()
     private let rightDoor = UIImageView()
+    private let pauseButton = UIBarButtonItem(title: "pause", style: .plain, target: self, action: #selector(pause(_:)))
     
     private lazy var collectionView = UICollectionView(frame: ingameView.frame, collectionViewLayout: layout)
     private let layout = UICollectionViewFlowLayout()
@@ -50,6 +51,7 @@ class IngameViewController: UIViewController {
         super.viewWillAppear(animated)
         setFlowLayout()
         ingameView.configure(background: ingameViewImageName)
+        manager.gameSet(pauseButton: pauseButton, isEnabled: false, collectionView: collectionView, isUserInteractionEnabled: false)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -80,7 +82,6 @@ class IngameViewController: UIViewController {
         countDownLabel.frame.size = CGSize(width: 100, height: 40)
         countDownLabel.textAlignment = .center
         self.navigationItem.titleView = countDownLabel
-        let pauseButton = UIBarButtonItem(title: "pause", style: .plain, target: self, action: #selector(pause(_:)))
         pauseButton.setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "diablo", size: 20) as Any], for: .normal)
         self.navigationItem.rightBarButtonItem = pauseButton
         self.navigationItem.rightBarButtonItem?.tintColor = #colorLiteral(red: 0.4784313725, green: 0.02745098039, blue: 0.06274509804, alpha: 1)
@@ -150,6 +151,19 @@ extension IngameViewController: UICollectionViewDataSource, UICollectionViewDele
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PuzzleCell.identifier, for: indexPath) as! PuzzleCell
+        cell.flipToFront()
+        cell.configure(named: dataCards[indexPath.item].name)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            // pauseButton 활성화
+            // 컬렉션뷰 선택 가능
+            // 타이머 시작
+            // 다시 뒤집기
+            
+            self.manager.gameSet(pauseButton: self.pauseButton, isEnabled: true, collectionView: self.collectionView, isUserInteractionEnabled: true)
+            cell.flipToBack()
+            cell.configure(named: "back")
+        }
         return cell
     }
     
