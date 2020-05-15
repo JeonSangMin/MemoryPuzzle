@@ -11,11 +11,21 @@ import UIKit
 
 
 class IngameViewController: UIViewController {
+    
+//    override var preferredStatusBarStyle: UIStatusBarStyle {
+//        return .lightContent
+//    }
+    
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
+    
     private let ingameView = IngameView()
     private let ingameViewImageName: String
     private let leftDoor = UIImageView()
     private let rightDoor = UIImageView()
-    private let pauseButton = UIBarButtonItem(title: "pause", style: .plain, target: self, action: #selector(pause(_:)))
+    private lazy var pauseButton = UIBarButtonItem(title: "pause", style: .plain, target: self, action: #selector(pause(_:)))
+    private let countDownLabel = UILabel()
     
     private lazy var collectionView = UICollectionView(frame: ingameView.frame, collectionViewLayout: layout)
     private let layout = UICollectionViewFlowLayout()
@@ -32,6 +42,9 @@ class IngameViewController: UIViewController {
         setNaviBar()
         setUI()
         setCollectionView()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
+            self.manager.startTimer(countDownLabel: self.countDownLabel)
+        }
         print(dataCards)
     }
     
@@ -56,7 +69,7 @@ class IngameViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        collectionView.reloadData()
+        //        collectionView.reloadData()
     }
     
     override func viewSafeAreaInsetsDidChange() {
@@ -75,8 +88,7 @@ class IngameViewController: UIViewController {
         self.navigationController?.navigationBar.barTintColor = .black
         navigationController?.interactivePopGestureRecognizer?.isEnabled = false
         
-        let countDownLabel = UILabel()
-        countDownLabel.text = "1.57"
+        //        countDownLabel.text = "0"
         countDownLabel.font = UIFont(name: "diablo", size: 25)
         countDownLabel.textColor = #colorLiteral(red: 0.4784313725, green: 0.02745098039, blue: 0.06274509804, alpha: 1)
         countDownLabel.frame.size = CGSize(width: 100, height: 40)
@@ -134,8 +146,9 @@ class IngameViewController: UIViewController {
         
     }
     
+    
     @objc private func pause(_ sender: UIBarButtonItem) {
-        print("Pause")
+        manager.pause(sender, countDownLabel: countDownLabel)
     }
     
     
@@ -151,18 +164,17 @@ extension IngameViewController: UICollectionViewDataSource, UICollectionViewDele
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PuzzleCell.identifier, for: indexPath) as! PuzzleCell
-        cell.flipToFront()
-        cell.configure(named: dataCards[indexPath.item].name)
         
+        // 0.5초 뒤에 앞면으로 뒤집은 후 2초간 보여줌
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            cell.flipToFront(named: self.dataCards[indexPath.item].name)
+        }
+        
+        // 2초 후 원래대로 뒤집고 게임 시작
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            // pauseButton 활성화
-            // 컬렉션뷰 선택 가능
-            // 타이머 시작
-            // 다시 뒤집기
-            
+            // 타이머 시작 기능
             self.manager.gameSet(pauseButton: self.pauseButton, isEnabled: true, collectionView: self.collectionView, isUserInteractionEnabled: true)
-            cell.flipToBack()
-            cell.configure(named: "back")
+            cell.flipToBack(named: "back")
         }
         return cell
     }
@@ -171,22 +183,13 @@ extension IngameViewController: UICollectionViewDataSource, UICollectionViewDele
     // 낙장불입!(다시 뒤집을 수 없음)
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let cell = collectionView.cellForItem(at: indexPath) as? PuzzleCell else { return }
-        cell.configure(named: dataCards[indexPath.item].name)
-        manager.getTouchedCard(cell: cell)
-        print(cell.isSelected)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        guard let cell = collectionView.cellForItem(at: indexPath) as? PuzzleCell else { return }
-        cell.configure(named: "back")
-        manager.getTouchedCard(cell: cell)
-        print(cell.isSelected)
+        manager.getTouchedCard(cell: cell, named: dataCards[indexPath.item].name)
     }
 }
 
 // MARK: Set FlowLayout
 extension IngameViewController {
-
+    
     func setFlowLayout(){
         let edgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 0, right: 10)
         layout.minimumLineSpacing = 7

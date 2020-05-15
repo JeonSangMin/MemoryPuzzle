@@ -12,16 +12,16 @@ import UIKit
 
 final class GameManager {
     private var audioPlayer = AVAudioPlayer()
-    private var timer = Timer()
+    private var timer: Timer?
     private var isPause = false
     private var time: Double = 0
     
     // 카드 터치 감지
-    func getTouchedCard(cell: PuzzleCell) {
+    func getTouchedCard(cell: PuzzleCell, named: String) {
         if cell.isSelected {
-            cell.flipToFront()
+            cell.flipToFront(named: named)
         } else {
-            cell.flipToBack()
+            cell.flipToBack(named: named)
         }
     }
     
@@ -75,26 +75,28 @@ final class GameManager {
     
     // MARK: TimeManaging
     func startTimer(countDownLabel: UILabel) {
-        timer = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(update), userInfo: nil, repeats: true)
-        countDownLabel.text = String(format: "%.2f", time)
+        let label = countDownLabel
+        timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(update(_:)), userInfo: label, repeats: true)
     }
     
-    @objc func update() {
-        if(time >= 0.00) {
-            time += 0.01
-//            countDownLabel.text = String(format: "%.2f", time)
+    func stopTimer() {
+        self.timer?.invalidate()
+        timer = nil
+    }
+    
+    @objc func update(_ sender: Timer) {
+        let label = sender.userInfo as! UILabel
+            if(time >= 0) {
+                time += 0.1
+                label.text = String(format: "%.1f", time)
+            }
         }
-    }
     
-    @objc func pause(_ sender: UIButton, countDownLabel: UILabel) {
+    @objc func pause(_ sender: UIBarButtonItem, countDownLabel: UILabel) {
         if isPause {
             startTimer(countDownLabel: countDownLabel)
-//            pauseLabel.isHidden = true
-//            view.sendSubviewToBack(pauseLabel)
         } else {
-            timer.invalidate()
-//            pauseLabel.isHidden = false
-//            view.bringSubviewToFront(self.pauseLabel)
+            stopTimer()
         }
         isPause.toggle()
     }

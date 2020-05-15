@@ -22,7 +22,7 @@
 		F486253C2465516E00284547 /* PuzzleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F486253B2465516E00284547 /* PuzzleCell.swift */; };
 		F486253E24655FDE00284547 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F486253D24655FDE00284547 /* Extensions.swift */; };
 		F48625402465603000284547 /* IngameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F486253F2465603000284547 /* IngameView.swift */; };
-		F486254724656B6200284547 /* launch.gif in Resources */ = {isa = PBXBuildFile; fileRef = F486254624656B6200284547 /* launch.gif */; };
+		F4A18F4B246EC97D0019379D /* launch.gif in Resources */ = {isa = PBXBuildFile; fileRef = F4A18F4A246EC97C0019379D /* launch.gif */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,7 +45,7 @@
 		F486253B2465516E00284547 /* PuzzleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuzzleCell.swift; sourceTree = "<group>"; };
 		F486253D24655FDE00284547 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		F486253F2465603000284547 /* IngameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngameView.swift; sourceTree = "<group>"; };
-		F486254624656B6200284547 /* launch.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = launch.gif; path = ../../../../../../.Trash/launch.gif; sourceTree = "<group>"; };
+		F4A18F4A246EC97C0019379D /* launch.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = launch.gif; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,7 +144,7 @@
 			isa = PBXGroup;
 			children = (
 				F44CE2492461AA0700EB3C2B /* diablo.ttf */,
-				F486254624656B6200284547 /* launch.gif */,
+				F4A18F4A246EC97C0019379D /* launch.gif */,
 			);
 			path = Assets;
 			sourceTree = "<group>";
@@ -219,7 +219,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F44CE24224619EA200EB3C2B /* LaunchScreen.storyboard in Resources */,
-				F486254724656B6200284547 /* launch.gif in Resources */,
+				F4A18F4B246EC97D0019379D /* launch.gif in Resources */,
 				F45AF37D2462BCF1009DC5D3 /* diablo.ttf in Resources */,
 				F44CE23F24619EA200EB3C2B /* Assets.xcassets in Resources */,
 			);
