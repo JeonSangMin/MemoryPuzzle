@@ -11,11 +11,7 @@ import UIKit
 
 
 class IngameViewController: UIViewController {
-    
-//    override var preferredStatusBarStyle: UIStatusBarStyle {
-//        return .lightContent
-//    }
-    
+        
     override var prefersStatusBarHidden: Bool {
         return true
     }
@@ -35,7 +31,6 @@ class IngameViewController: UIViewController {
     
     private let itemsInLine: CGFloat
     private let linesOnScreen: CGFloat
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -69,7 +64,6 @@ class IngameViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        //        collectionView.reloadData()
     }
     
     override func viewSafeAreaInsetsDidChange() {
@@ -82,13 +76,12 @@ class IngameViewController: UIViewController {
         setFlowLayout()
     }
     
-    
+    // MARK: NavigationBar Setting
     private func setNaviBar() {
         self.navigationController?.isNavigationBarHidden = false
         self.navigationController?.navigationBar.barTintColor = .black
         navigationController?.interactivePopGestureRecognizer?.isEnabled = false
         
-        //        countDownLabel.text = "0"
         countDownLabel.font = UIFont(name: "diablo", size: 25)
         countDownLabel.textColor = #colorLiteral(red: 0.4784313725, green: 0.02745098039, blue: 0.06274509804, alpha: 1)
         countDownLabel.frame.size = CGSize(width: 100, height: 40)
@@ -99,6 +92,7 @@ class IngameViewController: UIViewController {
         self.navigationItem.rightBarButtonItem?.tintColor = #colorLiteral(red: 0.4784313725, green: 0.02745098039, blue: 0.06274509804, alpha: 1)
     }
     
+    // MARK: UI Setting
     private func setUI() {
         view.addSubview(ingameView)
         ingameView.snp.makeConstraints {
@@ -128,6 +122,7 @@ class IngameViewController: UIViewController {
         
     }
     
+    // MARK: CollectionView Setting
     private func setCollectionView() {
         view.addSubview(collectionView)
         
@@ -135,7 +130,6 @@ class IngameViewController: UIViewController {
         collectionView.dataSource = self
         collectionView.delegate = self
         
-        collectionView.isMultipleTouchEnabled = true
         collectionView.allowsSelection = true
         collectionView.allowsMultipleSelection = true
         
@@ -146,14 +140,12 @@ class IngameViewController: UIViewController {
         
     }
     
-    
+    // MARK: Timer Function
     @objc private func pause(_ sender: UIBarButtonItem) {
         manager.pause(sender, countDownLabel: countDownLabel)
     }
     
-    
 }
-
 
 extension IngameViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     
@@ -172,7 +164,6 @@ extension IngameViewController: UICollectionViewDataSource, UICollectionViewDele
         
         // 2초 후 원래대로 뒤집고 게임 시작
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            // 타이머 시작 기능
             self.manager.gameSet(pauseButton: self.pauseButton, isEnabled: true, collectionView: self.collectionView, isUserInteractionEnabled: true)
             cell.flipToBack(named: "back")
         }
