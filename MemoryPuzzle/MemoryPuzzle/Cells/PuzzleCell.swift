@@ -30,12 +30,15 @@ class PuzzleCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func flipToFront() {
+    func flipToFront(named: String) {
         UIView.transition(with: self, duration: 0.3, options: .transitionFlipFromLeft, animations: nil, completion: nil)
+        self.configure(named: named)
+        
     }
     
-    func flipToBack() {
+    func flipToBack(named: String) {
         UIView.transition(with: self, duration: 0.3, options: .transitionFlipFromRight, animations: nil, completion: nil)
+        self.configure(named: named)
     }
     
     private func setUI() {
