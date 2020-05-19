@@ -15,13 +15,30 @@ protocol ComparingCardsDelegate: class {
 }
 
 final class GameManager {
-    private var audioPlayer = AVAudioPlayer()
+    private var audioPlayer: AVAudioPlayer!
     private var timer: Timer?
-    var isPause = false
+    private var matchedCardsCount = 0
     private var time: Double = 0
     private let ingameView = IngameView()
+    var isPause = false
     
     weak var delegate: ComparingCardsDelegate?
+    
+    func showAnswer(dataCards: [Card]) {
+           var line = 1
+           var row = 1 {
+               didSet {
+                   if row == 5 {
+                       row = 1
+                       line += 1
+                   }
+               }
+           }
+           dataCards.forEach {
+               print($0.name, "  [\(line)행, \(row)열]")
+               row += 1
+           }
+       }
         
     func gameSet(pauseButton: UIBarButtonItem, isEnabled: Bool, collectionView: UICollectionView, isUserInteractionEnabled: Bool) {
         pauseButton.isEnabled = isEnabled
@@ -99,9 +116,11 @@ final class GameManager {
         isPause.toggle()
     }
     
-    func compare(dataCards: [Card] , indexPaths: [IndexPath], collectionView: UICollectionView) {
+    func compare(dataCards: [Card] , indexPaths: [IndexPath], collectionView: UICollectionView, isGameSet: inout Bool) {
+        
         if dataCards[indexPaths[0].item].name == dataCards[indexPaths[1].item].name {
-            print("매치!")
+            
+            matchedCardsCount += 2
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 indexPaths.forEach {
                     let cell = collectionView.cellForItem(at: $0) as! PuzzleCell
@@ -111,6 +130,12 @@ final class GameManager {
                     })
                 }
             }
+            if dataCards.count == self.matchedCardsCount {
+                print("게임 끝")
+                isGameSet = true
+                self.stopTimer()
+            }
+            print("총 갯수: ",dataCards.count, "맞춘 갯수: ", matchedCardsCount)
         } else {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 indexPaths.forEach {
