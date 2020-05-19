@@ -10,15 +10,17 @@ import UIKit
 
 class PuzzleCell: UICollectionViewCell {
     static let identifier = "PuzzleCell"
-    var isTouched: Bool = false {
+    
+    override var isSelected: Bool {
         didSet {
-            if isTouched {
-                UIView.transition(with: self, duration: 0.3, options: .transitionFlipFromLeft, animations: nil, completion: nil)
+            if isSelected {
+                flipToFront()
             } else {
-                UIView.transition(with: self, duration: 0.3, options: .transitionFlipFromRight, animations: nil, completion: nil)
+               UIView.transition(with: self, duration: 0.3, options: .transitionFlipFromRight, animations: nil, completion: nil)
             }
         }
     }
+    
     private let imageView = UIImageView()
     
     override init(frame: CGRect) {
@@ -30,10 +32,8 @@ class PuzzleCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func flipToFront(named: String) {
+    func flipToFront() {
         UIView.transition(with: self, duration: 0.3, options: .transitionFlipFromLeft, animations: nil, completion: nil)
-        self.configure(named: named)
-        
     }
     
     func flipToBack(named: String) {
