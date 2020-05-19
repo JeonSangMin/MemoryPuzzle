@@ -10,29 +10,26 @@ import Foundation
 import AVFoundation
 import UIKit
 
+protocol ComparingCardsDelegate: class {
+    func compare(firstCell: IndexPath, secondCell: IndexPath) -> ()
+}
+
 final class GameManager {
     private var audioPlayer = AVAudioPlayer()
     private var timer: Timer?
-    private var isPause = false
+    var isPause = false
     private var time: Double = 0
+    private let ingameView = IngameView()
     
-    // 카드 터치 감지
-    func getTouchedCard(cell: PuzzleCell, named: String) {
-        if cell.isSelected {
-            cell.flipToFront(named: named)
-        } else {
-            cell.flipToBack(named: named)
-        }
-    }
-    
+    weak var delegate: ComparingCardsDelegate?
+        
     func gameSet(pauseButton: UIBarButtonItem, isEnabled: Bool, collectionView: UICollectionView, isUserInteractionEnabled: Bool) {
         pauseButton.isEnabled = isEnabled
         collectionView.isUserInteractionEnabled = isUserInteractionEnabled
     }
     
-    
     // 문 닫히기
-    fileprivate func closeTheGate(leftDoor: UIImageView, rightDoor: UIImageView) {
+    func closeTheGate(leftDoor: UIImageView, rightDoor: UIImageView) {
         leftDoor.isHidden = false
         rightDoor.isHidden = false
         UIView.animate(withDuration: 1, animations: {
@@ -45,7 +42,7 @@ final class GameManager {
     }
     
     // 카드 뒤집는 소리
-    fileprivate func flipCardAudio() {
+    func flipCardAudio() {
         guard let soundAsset: NSDataAsset = NSDataAsset(name: "flip1") else {
             print(#function, " failed to play")
             return
@@ -72,7 +69,6 @@ final class GameManager {
         }
     }
     
-    
     // MARK: TimeManaging
     func startTimer(countDownLabel: UILabel) {
         let label = countDownLabel
@@ -92,12 +88,38 @@ final class GameManager {
             }
         }
     
-    @objc func pause(_ sender: UIBarButtonItem, countDownLabel: UILabel) {
+    @objc func pause(_ sender: UIBarButtonItem, countDownLabel: UILabel, pauseLabel: UILabel) {
         if isPause {
             startTimer(countDownLabel: countDownLabel)
+            pauseLabel.isHidden = true
         } else {
             stopTimer()
+            pauseLabel.isHidden = false
         }
         isPause.toggle()
     }
+    
+    func compare(dataCards: [Card] , indexPaths: [IndexPath], collectionView: UICollectionView) {
+        if dataCards[indexPaths[0].item].name == dataCards[indexPaths[1].item].name {
+            print("매치!")
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                indexPaths.forEach {
+                    let cell = collectionView.cellForItem(at: $0) as! PuzzleCell
+                    cell.isUserInteractionEnabled = false
+                    UIView.animate(withDuration: 0.3, animations: {
+                        cell.alpha = 0
+                    })
+                }
+            }
+        } else {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                indexPaths.forEach {
+                    let cell = collectionView.cellForItem(at: $0) as! PuzzleCell
+                    collectionView.deselectItem(at: $0, animated: false)
+                    cell.configure(named: "back")
+                }
+            }
+        }
+    }
 }
+
