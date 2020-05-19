@@ -8,10 +8,8 @@
 
 import UIKit
 
-
-
 class IngameViewController: UIViewController {
-        
+    
     override var prefersStatusBarHidden: Bool {
         return true
     }
@@ -22,12 +20,16 @@ class IngameViewController: UIViewController {
     private let rightDoor = UIImageView()
     private lazy var pauseButton = UIBarButtonItem(title: "pause", style: .plain, target: self, action: #selector(pause(_:)))
     private let countDownLabel = UILabel()
+    private let pauseLabel = UILabel()
     
     private lazy var collectionView = UICollectionView(frame: ingameView.frame, collectionViewLayout: layout)
     private let layout = UICollectionViewFlowLayout()
     
     private let manager = GameManager()
     private let dataCards: [Card]
+    
+    // IndexPaths
+    private var indexPaths = [IndexPath]()
     
     private let itemsInLine: CGFloat
     private let linesOnScreen: CGFloat
@@ -120,6 +122,18 @@ class IngameViewController: UIViewController {
             $0.leading.equalTo(view.snp.trailing)
         }
         
+        pauseLabel.text = "Pause"
+        pauseLabel.font = UIFont(name: "diablo", size: 40)
+        pauseLabel.backgroundColor = .black
+        pauseLabel.textColor = #colorLiteral(red: 0.4784313725, green: 0.02745098039, blue: 0.06274509804, alpha: 1)
+        pauseLabel.textAlignment = .center
+        view.addSubview(pauseLabel)
+        pauseLabel.isHidden = true
+        
+        pauseLabel.snp.makeConstraints {
+            $0.center.equalToSuperview()
+        }
+        
     }
     
     // MARK: CollectionView Setting
@@ -137,12 +151,12 @@ class IngameViewController: UIViewController {
         collectionView.snp.makeConstraints {
             $0.leading.trailing.top.bottom.equalTo(ingameView)
         }
-        
+        view.bringSubviewToFront(pauseLabel)
     }
     
     // MARK: Timer Function
     @objc private func pause(_ sender: UIBarButtonItem) {
-        manager.pause(sender, countDownLabel: countDownLabel)
+        manager.pause(sender, countDownLabel: countDownLabel, pauseLabel: pauseLabel)
     }
     
 }
@@ -159,7 +173,8 @@ extension IngameViewController: UICollectionViewDataSource, UICollectionViewDele
         
         // 0.5초 뒤에 앞면으로 뒤집은 후 2초간 보여줌
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            cell.flipToFront(named: self.dataCards[indexPath.item].name)
+            cell.flipToFront()
+            cell.configure(named: self.dataCards[indexPath.item].name)
         }
         
         // 2초 후 원래대로 뒤집고 게임 시작
@@ -174,7 +189,21 @@ extension IngameViewController: UICollectionViewDataSource, UICollectionViewDele
     // 낙장불입!(다시 뒤집을 수 없음)
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let cell = collectionView.cellForItem(at: indexPath) as? PuzzleCell else { return }
-        manager.getTouchedCard(cell: cell, named: dataCards[indexPath.item].name)
+        
+        cell.configure(named: dataCards[indexPath.item].name)
+        indexPaths.append(indexPath)
+        
+        // 카드 비교
+        if indexPaths.count == 2 {
+            manager.compare(dataCards: dataCards, indexPaths: indexPaths, collectionView: collectionView)
+            indexPaths.removeAll()
+        }
+        manager.flipCardAudio()
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
+        guard indexPaths.count < 2, !manager.isPause else { return false}
+        return true
     }
 }
 
