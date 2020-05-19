@@ -21,6 +21,14 @@ class IngameViewController: UIViewController {
     private lazy var pauseButton = UIBarButtonItem(title: "pause", style: .plain, target: self, action: #selector(pause(_:)))
     private let countDownLabel = UILabel()
     private let pauseLabel = UILabel()
+    private var gameSet: Bool = false {
+        didSet {
+            guard gameSet else { return }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
+                self.manager.closeTheGate(leftDoor: self.leftDoor, rightDoor: self.rightDoor)
+            }
+        }
+    }
     
     private lazy var collectionView = UICollectionView(frame: ingameView.frame, collectionViewLayout: layout)
     private let layout = UICollectionViewFlowLayout()
@@ -30,7 +38,6 @@ class IngameViewController: UIViewController {
     
     // IndexPaths
     private var indexPaths = [IndexPath]()
-    
     private let itemsInLine: CGFloat
     private let linesOnScreen: CGFloat
     
@@ -42,7 +49,6 @@ class IngameViewController: UIViewController {
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
             self.manager.startTimer(countDownLabel: self.countDownLabel)
         }
-        print(dataCards)
     }
     
     init(cards: [Card], itemsInline: CGFloat, linesOnScreen: CGFloat, ingameViewImageName: String) {
@@ -66,6 +72,7 @@ class IngameViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        manager.showAnswer(dataCards: dataCards)
     }
     
     override func viewSafeAreaInsetsDidChange() {
@@ -93,6 +100,7 @@ class IngameViewController: UIViewController {
         self.navigationItem.rightBarButtonItem = pauseButton
         self.navigationItem.rightBarButtonItem?.tintColor = #colorLiteral(red: 0.4784313725, green: 0.02745098039, blue: 0.06274509804, alpha: 1)
     }
+   
     
     // MARK: UI Setting
     private func setUI() {
@@ -170,7 +178,6 @@ extension IngameViewController: UICollectionViewDataSource, UICollectionViewDele
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PuzzleCell.identifier, for: indexPath) as! PuzzleCell
-        
         // 0.5초 뒤에 앞면으로 뒤집은 후 2초간 보여줌
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             cell.flipToFront()
@@ -195,10 +202,11 @@ extension IngameViewController: UICollectionViewDataSource, UICollectionViewDele
         
         // 카드 비교
         if indexPaths.count == 2 {
-            manager.compare(dataCards: dataCards, indexPaths: indexPaths, collectionView: collectionView)
+            manager.compare(dataCards: dataCards, indexPaths: indexPaths, collectionView: collectionView, isGameSet: &gameSet)
             indexPaths.removeAll()
         }
-        manager.flipCardAudio()
+        // 에러나서 지움
+//        manager.flipCardAudio()
     }
     
     func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
