@@ -22,6 +22,8 @@
 		F486253C2465516E00284547 /* PuzzleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F486253B2465516E00284547 /* PuzzleCell.swift */; };
 		F486253E24655FDE00284547 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F486253D24655FDE00284547 /* Extensions.swift */; };
 		F48625402465603000284547 /* IngameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F486253F2465603000284547 /* IngameView.swift */; };
+		F495A4C224766C33009FA8A9 /* RecordsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F495A4C124766C33009FA8A9 /* RecordsViewController.swift */; };
+		F495A4C424766C43009FA8A9 /* RecordsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F495A4C324766C43009FA8A9 /* RecordsView.swift */; };
 		F4A18F4B246EC97D0019379D /* launch.gif in Resources */ = {isa = PBXBuildFile; fileRef = F4A18F4A246EC97C0019379D /* launch.gif */; };
 /* End PBXBuildFile section */
 
@@ -45,6 +47,8 @@
 		F486253B2465516E00284547 /* PuzzleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuzzleCell.swift; sourceTree = "<group>"; };
 		F486253D24655FDE00284547 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		F486253F2465603000284547 /* IngameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngameView.swift; sourceTree = "<group>"; };
+		F495A4C124766C33009FA8A9 /* RecordsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordsViewController.swift; sourceTree = "<group>"; };
+		F495A4C324766C43009FA8A9 /* RecordsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordsView.swift; sourceTree = "<group>"; };
 		F4A18F4A246EC97C0019379D /* launch.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = launch.gif; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -107,6 +111,7 @@
 			children = (
 				F45AF37124629851009DC5D3 /* MainViewController.swift */,
 				F486253724654AAA00284547 /* IngameViewController.swift */,
+				F495A4C124766C33009FA8A9 /* RecordsViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -117,6 +122,7 @@
 				F45AF3772462AC76009DC5D3 /* LogoAnimationView.swift */,
 				F45AF37B2462B391009DC5D3 /* MainView.swift */,
 				F486253F2465603000284547 /* IngameView.swift */,
+				F495A4C324766C43009FA8A9 /* RecordsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -281,10 +287,12 @@
 				F486253C2465516E00284547 /* PuzzleCell.swift in Sources */,
 				F45AF37C2462B391009DC5D3 /* MainView.swift in Sources */,
 				F486253E24655FDE00284547 /* Extensions.swift in Sources */,
+				F495A4C424766C43009FA8A9 /* RecordsView.swift in Sources */,
 				F486253824654AAA00284547 /* IngameViewController.swift in Sources */,
 				F45AF37224629851009DC5D3 /* MainViewController.swift in Sources */,
 				F45AF3782462AC76009DC5D3 /* LogoAnimationView.swift in Sources */,
 				F486253A24654B0700284547 /* Card.swift in Sources */,
+				F495A4C224766C33009FA8A9 /* RecordsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
