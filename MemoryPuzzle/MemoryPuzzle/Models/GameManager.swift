@@ -130,11 +130,30 @@ final class GameManager {
                 }
                 collectionView.isUserInteractionEnabled = true
             }
-            if dataCards.count == self.matchedCardsCount {
-                isGameSet = true
-                self.stopTimer()
+            switch dataCards.count {
+            case 20:
+                if dataCards.count == self.matchedCardsCount {
+                    isGameSet = true
+                    self.stopTimer()
+                }
+            case 40:
+                if self.matchedCardsCount == 2 {
+                    isGameSet = true
+                    self.stopTimer()
+                }
+            case 60:
+                if self.matchedCardsCount == 4 {
+                    isGameSet = true
+                    self.stopTimer()
+                }
+            
+            default:
+                break;
             }
-            print("총 갯수: ",dataCards.count, "맞춘 갯수: ", matchedCardsCount)
+//            if dataCards.count == self.matchedCardsCount {
+//                isGameSet = true
+//                self.stopTimer()
+//            }
         } else {
             collectionView.isUserInteractionEnabled = false
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {

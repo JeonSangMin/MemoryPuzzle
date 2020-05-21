@@ -54,7 +54,7 @@ class RecordsView: UIView {
         let normalRecord = String(format: "%.1f", normalDouble)
         normal.text = normalRecord
         
-        let nightDouble = UserDefaults.standard.object(forKey: "Night") as? Double ?? 0.0
+        let nightDouble = UserDefaults.standard.object(forKey: "NightMare") as? Double ?? 0.0
         let nightRecord = String(format: "%.1f", nightDouble)
         night.text = nightRecord
         

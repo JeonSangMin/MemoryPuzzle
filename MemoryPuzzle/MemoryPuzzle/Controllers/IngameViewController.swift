@@ -26,6 +26,8 @@ class IngameViewController: UIViewController {
             guard gameSet else { return }
             manager.gameSet(pauseButton: pauseButton, isEnabled: false, collectionView: collectionView, isUserInteractionEnabled: false)
             manager.record(identifier: identifier)
+            view.bringSubviewToFront(leftDoor)
+            view.bringSubviewToFront(rightDoor)
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
                 self.manager.closeTheGate(leftDoor: self.leftDoor, rightDoor: self.rightDoor)
             }
