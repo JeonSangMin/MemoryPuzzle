@@ -43,8 +43,8 @@ class MainViewController: UIViewController {
     // 네비게이션바 설정
     private func setNavigationBar() {
         self.navigationController?.isNavigationBarHidden = true
-        let backButton = UIBarButtonItem(title: "Back", style: .plain, target: nil, action: nil)
-        backButton.setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "diablo", size: 20) as Any], for: .normal)
+        let backButton = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+//        backButton.setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "diablo", size: 20) as Any], for: .normal)
         self.navigationItem.backBarButtonItem = backButton
         self.navigationItem.backBarButtonItem?.tintColor = #colorLiteral(red: 0.4784313725, green: 0.02745098039, blue: 0.06274509804, alpha: 1)
     }
@@ -60,6 +60,10 @@ extension MainViewController: SwiftyGifDelegate {
 
 
 extension MainViewController: ButtonIsClicked {
+    func pushRecordsViewController(recordsVC: UIViewController) {
+        self.navigationController?.pushViewController(recordsVC, animated: true)
+    }
+    
     func pushViewController(cards: [Card], itemsInline: CGFloat, linesOnScreen: CGFloat, ingameViewImageName: String) {
         let stageVC = IngameViewController(cards: cards, itemsInline: itemsInline, linesOnScreen: linesOnScreen, ingameViewImageName: ingameViewImageName)
         self.navigationController?.pushViewController(stageVC, animated: true)
