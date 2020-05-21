@@ -15,7 +15,7 @@ class IngameViewController: UIViewController {
     }
     
     private let ingameView = IngameView()
-    private let ingameViewImageName: String
+    private let identifier: String
     private let leftDoor = UIImageView()
     private let rightDoor = UIImageView()
     private lazy var pauseButton = UIBarButtonItem(title: "pause", style: .plain, target: self, action: #selector(pause(_:)))
@@ -24,6 +24,8 @@ class IngameViewController: UIViewController {
     private var gameSet: Bool = false {
         didSet {
             guard gameSet else { return }
+            manager.gameSet(pauseButton: pauseButton, isEnabled: false, collectionView: collectionView, isUserInteractionEnabled: false)
+            manager.record(identifier: identifier)
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
                 self.manager.closeTheGate(leftDoor: self.leftDoor, rightDoor: self.rightDoor)
             }
@@ -55,7 +57,7 @@ class IngameViewController: UIViewController {
         self.dataCards = cards
         self.itemsInLine = itemsInline
         self.linesOnScreen = linesOnScreen
-        self.ingameViewImageName = ingameViewImageName
+        self.identifier = ingameViewImageName
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -66,7 +68,7 @@ class IngameViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setFlowLayout()
-        ingameView.configure(background: ingameViewImageName)
+        ingameView.configure(background: identifier)
         manager.gameSet(pauseButton: pauseButton, isEnabled: false, collectionView: collectionView, isUserInteractionEnabled: false)
     }
     
