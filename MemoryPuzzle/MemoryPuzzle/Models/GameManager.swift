@@ -117,9 +117,8 @@ final class GameManager {
     }
     
     func compare(dataCards: [Card] , indexPaths: [IndexPath], collectionView: UICollectionView, isGameSet: inout Bool) {
-        
         if dataCards[indexPaths[0].item].name == dataCards[indexPaths[1].item].name {
-            
+            collectionView.isUserInteractionEnabled = false
             matchedCardsCount += 2
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 indexPaths.forEach {
@@ -129,22 +128,39 @@ final class GameManager {
                         cell.alpha = 0
                     })
                 }
+                collectionView.isUserInteractionEnabled = true
             }
             if dataCards.count == self.matchedCardsCount {
-                print("게임 끝")
                 isGameSet = true
                 self.stopTimer()
             }
             print("총 갯수: ",dataCards.count, "맞춘 갯수: ", matchedCardsCount)
         } else {
+            collectionView.isUserInteractionEnabled = false
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 indexPaths.forEach {
                     let cell = collectionView.cellForItem(at: $0) as! PuzzleCell
                     collectionView.deselectItem(at: $0, animated: false)
                     cell.configure(named: "back")
                 }
+                collectionView.isUserInteractionEnabled = true
             }
         }
+    }
+    
+    func record(identifier: String) {
+        let currentRecord = time
+        let bestRecord: Double
+        if let tempRecord = UserDefaults.standard.object(forKey: identifier) as? Double {
+            if currentRecord < tempRecord {
+                bestRecord = currentRecord
+            } else {
+                bestRecord = tempRecord
+            }
+        } else {
+            bestRecord = currentRecord
+        }
+        UserDefaults.standard.set(bestRecord, forKey: identifier)
     }
 }
 
