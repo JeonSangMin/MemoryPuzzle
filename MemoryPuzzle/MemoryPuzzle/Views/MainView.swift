@@ -7,6 +7,7 @@
 
 protocol ButtonIsClicked: class {
     func pushViewController(cards: [Card], itemsInline: CGFloat, linesOnScreen: CGFloat, ingameViewImageName: String)
+    func pushRecordsViewController(recordsVC: UIViewController)
 }
 
 import UIKit
@@ -102,7 +103,8 @@ class MainView: UIView {
             let cards = (hellCards + hellCards).shuffled()
             delegate?.pushViewController(cards: cards, itemsInline: 6, linesOnScreen: 10, ingameViewImageName: "Hell")
         case "Records":
-            print("기록버튼 클릭")
+            let recordsVC = RecordsViewController()
+            delegate?.pushRecordsViewController(recordsVC: recordsVC)
         default:
             break
         }
