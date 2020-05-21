@@ -9,22 +9,29 @@
 import UIKit
 
 class RecordsViewController: UIViewController {
-
+    private let recordsView = RecordsView()
+    private let titleLabel = UILabel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        view.addSubview(recordsView)
+        setNaviBar()
+        recordsView.snp.makeConstraints {
+            $0.top.leading.trailing.bottom.equalToSuperview()
+        }
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    private func setNaviBar() {
+        self.navigationController?.isNavigationBarHidden = false
+        self.navigationController?.navigationBar.barTintColor = .black
+        navigationController?.interactivePopGestureRecognizer?.isEnabled = false
+        
+        titleLabel.text = "records"
+        titleLabel.font = UIFont(name: "diablo", size: 25)
+        titleLabel.textColor = #colorLiteral(red: 0.4784313725, green: 0.02745098039, blue: 0.06274509804, alpha: 1)
+        titleLabel.frame.size = CGSize(width: 100, height: 40)
+        titleLabel.textAlignment = .center
+        self.navigationItem.titleView = titleLabel
     }
-    */
 
 }
