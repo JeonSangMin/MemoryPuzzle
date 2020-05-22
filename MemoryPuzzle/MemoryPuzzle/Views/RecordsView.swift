@@ -92,17 +92,17 @@ class RecordsView: UIView {
         
         normal.snp.makeConstraints {
             $0.top.equalTo(normalLabel.snp.top)
-            $0.trailing.equalTo(recordsView.snp.trailing).inset(10)
+            $0.trailing.equalTo(recordsView.snp.trailing).inset(30)
         }
         
         night.snp.makeConstraints {
             $0.top.equalTo(nightLabel.snp.top)
-            $0.trailing.equalTo(recordsView.snp.trailing).inset(10)
+            $0.trailing.equalTo(recordsView.snp.trailing).inset(30)
         }
 
         hell.snp.makeConstraints {
             $0.top.equalTo(hellLabel.snp.top)
-            $0.trailing.equalTo(recordsView.snp.trailing).inset(10)
+            $0.trailing.equalTo(recordsView.snp.trailing).inset(30)
         }
 
     }
